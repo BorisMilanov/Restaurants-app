@@ -14,6 +14,7 @@ const Navbar = () => {
        
                 {!token && <Link to="/register">Register</Link>}
                 {!token && <Link to="/login">Login</Link>}
+                {token && <Link to="/home">Home</Link>}
                  
                
             </div>
@@ -21,6 +22,10 @@ const Navbar = () => {
                 className={`nav-toggle ${isOpen && "open"}`}
                 onClick={() => setIsOpen(!isOpen)}
             >
+                    {!token && <Link to="/register">Register</Link>}
+                {!token && <Link to="/login">Login</Link>}
+                 
+               
                 <div className="bar"></div>
             </div>
         </div>
