@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
+
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const token = localStorage.getItem("token");
@@ -15,6 +16,8 @@ const Navbar = () => {
                 {!token && <Link to="/register">Register</Link>}
                 {!token && <Link to="/login">Login</Link>}
                 {token && <Link to="/home">Home</Link>}
+                {token && <Link to="/restaurants">Restaurants List</Link>}
+                {token && <Link to="/restaurantsform">Restaurants Form</Link>}
                  
                
             </div>

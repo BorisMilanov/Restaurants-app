@@ -4,9 +4,9 @@ const Restaurant = require('../models/Restaurant');
 const getRestaurantsByFilters = async (req, res) => {
   console.log('request body is', req.body);
   try {
-    const {name} = req.body;
+    const {name,address,cuisine,rating} = req.body;
     const newRestaurant = new Restaurant({
-      name
+      name,address,cuisine,rating
    
     });
 

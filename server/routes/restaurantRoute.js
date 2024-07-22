@@ -5,6 +5,6 @@ const {
   getRestaurantsByFilters
 } = require('../controllers/restaurantController');
 
-router.post('/res',getRestaurantsByFilters);
+router.post('/restaurants',getRestaurantsByFilters);
 
 module.exports = router;
