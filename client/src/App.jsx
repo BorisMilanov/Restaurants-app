@@ -1,4 +1,5 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import Navbar from './Nav/Navbar'
 import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
 import Login from './Auth/Login';
@@ -19,30 +20,26 @@ function App() {
     }
   };
 
-  // const deleteRestaurant = async (id) => {
-  //   try {
-  //     await axios.delete(`http://localhost:5000/api/restaurants/${id}`);
-  //     fetchRestaurants();
-  //   } catch (error) {
-  //     console.error('Error deleting restaurant:', error);
-  //   }
-  // };
+  const deleteRestaurant = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/restaurants/${id}`);
+      fetchRestaurants();
+    } catch (error) {
+      console.error('Error deleting restaurant:', error);
+    }
+  };
 
-  // useEffect(() => {
-  //   fetchRestaurants();
-  // }, []);
+  useEffect(() => {
+    fetchRestaurants();
+  }, []);
   return (
     <><BrowserRouter><Navbar></Navbar><Routes>
 
       <Route path='/login' element={<Login />} />
-      <Route path='/' element={<Home/>}/>
-      <Route path='/register' element={<Register/>}/>
-      <Route path='/restaurantsform' element={<RestaurantForm fetchRestaurants={fetchRestaurants} />} />      
-      {/* <Route path='/restaurants' element={<RestaurantForm  deleteRestaurant={deleteRestaurant}  />} />       */}
-     
-
-
-
+      <Route path='/' element={<Home />} />
+      <Route path='/register' element={<Register />} />
+      <Route path='/restaurantsform' element={<RestaurantForm fetchRestaurants={fetchRestaurants} />} />
+      <Route path='/restaurantsall' element={<RestaurantList  restaurants={restaurants} />} />
     </Routes></BrowserRouter>
 
 

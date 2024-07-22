@@ -11,24 +11,24 @@ const Navbar = () => {
         <div className="Navbar">
             <span className="nav-logo">DevLHB</span>
             <div className={`nav-items ${isOpen && "open"}`}>
-              
-       
+
+
                 {!token && <Link to="/register">Register</Link>}
                 {!token && <Link to="/login">Login</Link>}
                 {token && <Link to="/home">Home</Link>}
-                {token && <Link to="/restaurants">Restaurants List</Link>}
+                {token && <Link to="/restaurantsall">Restaurants List</Link>}
                 {token && <Link to="/restaurantsform">Restaurants Form</Link>}
-                 
-               
+
+
             </div>
             <div
                 className={`nav-toggle ${isOpen && "open"}`}
                 onClick={() => setIsOpen(!isOpen)}
             >
-                    {!token && <Link to="/register">Register</Link>}
+                {!token && <Link to="/register">Register</Link>}
                 {!token && <Link to="/login">Login</Link>}
-                 
-               
+
+
                 <div className="bar"></div>
             </div>
         </div>
