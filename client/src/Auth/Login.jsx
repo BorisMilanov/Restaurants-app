@@ -1,46 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import './Login.css'
+import { useLogin } from '../useLogin/useLogin';
+import { useForm } from '../Form/formhook';
+import { useNavigate } from 'react-router-dom';
+
+
 const Login = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const login = useLogin()//axios
+    const navigate = useNavigate()
+  
+    const { values, changeHandler, submitHandler } = useForm({
+        email: '',
+        password: ''
+    }, async ({ email, password }) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/login', {
-                username,
-                password,
-            });
-
-            localStorage.setItem("token", response.data.token);
-        } catch (error) {
-            console.error('Login failed:', error);
-            alert('Login failed');
+            await login(email, password);
+            navigate('/')
+            // Handle successful login, e.g., redirect to another page
+        } catch (err) {
+            console.log(err.message);
+            
         }
-    };
-
+    });
     return (
-        <div className='formDivLogin'>
-            <form className='formLogin' onSubmit={handleSubmit} >
-                <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    placeholder="Username"
-                    required
-                />
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password"
-                    required
-                />
-                <button type="submit">Login</button>
+        <section id='login-page' className='auth'>
+            <form id='login' onSubmit={submitHandler}>
+                <div className='container'>
+                    <h1>Login</h1>
+                    <label htmlFor="email">Email:</label>
+                    <input type="email"
+                        id='email'
+                        name='email'
+                        value={values.email}
+                        onChange={changeHandler} />
+                    <label type="login-pass">Password:</label>
+                    <input type="password"
+                        id='login-password'
+                        name='password'
+                        value={values.password}
+                        onChange={changeHandler}
+                    />
+                    <input type='submit' className='btn submit' value="Login"/>
+                </div>
             </form>
-        </div>
-
+        </section>
     );
 };
 
